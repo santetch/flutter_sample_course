@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/app_blocs.dart';
 import 'package:u_course_example/app_events.dart';
 import 'package:u_course_example/app_states.dart';
+import 'package:u_course_example/pages/welcome/bloc/welcome_blocs.dart';
 
 import 'pages/welcome/views/welcome.dart';
 
@@ -16,16 +17,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: (context, child) => BlocProvider(
-        create: (context) => AppBlocs(),
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+    return BlocProvider(
+      create: (context) => WelcomeBloc(),
+      child: ScreenUtilInit(
+        builder: (context, child) => BlocProvider(
+          create: (context) => AppBlocs(),
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: const Welcome(),
           ),
-          home: const Welcome(),
         ),
       ),
     );
