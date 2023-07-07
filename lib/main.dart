@@ -6,10 +6,15 @@ import 'package:u_course_example/app_events.dart';
 import 'package:u_course_example/app_states.dart';
 import 'package:u_course_example/pages/sign_in/sign_in.dart';
 import 'package:u_course_example/pages/welcome/bloc/welcome_blocs.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'pages/welcome/views/welcome.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
