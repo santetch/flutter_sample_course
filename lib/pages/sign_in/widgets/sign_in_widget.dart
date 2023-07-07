@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:u_course_example/common/values/colors.dart';
 
 AppBar buildAppBar() {
   return AppBar(
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
       child: Container(
-        color: Colors.grey,
+        color: AppColors.primarySecondaryBackground,
         height: 1.0,
       ),
     ),
@@ -14,7 +15,7 @@ AppBar buildAppBar() {
       child: Text(
         "Log In",
         style: TextStyle(
-            color: Colors.black,
+            color: AppColors.primaryText,
             fontSize: 16.sp,
             fontWeight: FontWeight.normal),
       ),
@@ -28,6 +29,7 @@ Widget buildThirdPartyLogin(BuildContext context) {
       top: 40.h,
       bottom: 20.h,
     ),
+    padding: EdgeInsets.only(left: 25.w, right: 25.w),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -58,7 +60,7 @@ Widget reusableText(String text) {
     child: Text(
       text,
       style: TextStyle(
-        color: Colors.grey.withOpacity(0.9),
+        color: AppColors.primaryFourElementText,
         fontWeight: FontWeight.normal,
         fontSize: 14.sp,
       ),
@@ -74,7 +76,7 @@ Widget buildTextField(String hintText, String textType, String iconName) {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.all(Radius.circular(15.w)),
-      border: Border.all(color: Colors.black),
+      border: Border.all(color: AppColors.primaryFourElementText),
     ),
     child: Row(children: [
       Container(
@@ -90,8 +92,8 @@ Widget buildTextField(String hintText, String textType, String iconName) {
           keyboardType: TextInputType.multiline,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(
-              color: Colors.grey.withOpacity(0.5),
+            hintStyle: const TextStyle(
+              color: AppColors.primarySecondaryElementText,
             ),
             border: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.transparent),
@@ -113,7 +115,7 @@ Widget buildTextField(String hintText, String textType, String iconName) {
             ),
           ),
           style: TextStyle(
-            color: Colors.black,
+            color: AppColors.primaryText,
             fontFamily: "Avenir",
             fontWeight: FontWeight.normal,
             fontSize: 14.sp,
@@ -136,7 +138,7 @@ Widget forgotPassword() {
       child: Text(
         "Forgot password",
         style: TextStyle(
-          color: Colors.black,
+          color: AppColors.primaryText,
           decoration: TextDecoration.underline,
           decorationColor: Colors.blue,
           fontSize: 12.sp,
@@ -155,11 +157,18 @@ Widget buildLogInAndRegisterButtons(String buttonName, String buttonType) {
       margin: EdgeInsets.only(
         left: 25.w,
         right: 25.w,
-        top: buttonType == "login" ? 25.h : 15.h,
+        top: buttonType == "login" ? 20.h : 15.h,
       ),
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: buttonType == "login"
+            ? AppColors.primaryElement
+            : AppColors.primaryBackground,
         borderRadius: BorderRadius.circular(15.w),
+        border: Border.all(
+          color: buttonType == "login"
+              ? Colors.transparent
+              : AppColors.primaryFourElementText,
+        ),
         boxShadow: [
           BoxShadow(
             spreadRadius: 1,
@@ -175,7 +184,9 @@ Widget buildLogInAndRegisterButtons(String buttonName, String buttonType) {
         style: TextStyle(
           fontSize: 16.sp,
           fontWeight: FontWeight.normal,
-          color: Colors.white,
+          color: buttonType == "login"
+              ? AppColors.primaryBackground
+              : AppColors.primaryText,
         ),
       )),
     ),

@@ -1,16 +1,20 @@
 # u_course_example
 
-A new Flutter project.
+https://www.dbestech.com/tutorials/online-learning-course-app-tutorial
 
-## Getting Started
+This proyect consists for Laravel backend with Firebase for basic social media login. Most of the API are built using Laravel. The backend contains multi admin( super admin panel and teachers panel).
 
-This project is a starting point for a Flutter application.
+App Features
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+onboard screen
+email login
+social media login
+viewing course
+play video course
+upload course from backend
+view multiple teachers couse
+buy course on the front end
+stripe payment
+super admin panel
+teacher admin panel
+chatting feature
