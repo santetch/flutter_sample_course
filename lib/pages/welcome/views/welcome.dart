@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:u_course_example/main.dart';
 import 'package:u_course_example/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:u_course_example/pages/welcome/bloc/welcome_events.dart';
 import 'package:u_course_example/pages/welcome/bloc/welcome_states.dart';
@@ -130,13 +131,19 @@ class _WelcomeState extends State<Welcome> {
         ),
         GestureDetector(
           onTap: () {
-            if (index < 3) {
+            if (index < 2) {
               pageController.animateToPage(
                 index + 1,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.decelerate,
               );
-            } else {}
+            } else {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const MyHomePage(),
+                ),
+              );
+            }
           },
           child: Container(
             width: 325.w,
