@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/app_blocs.dart';
 import 'package:u_course_example/app_events.dart';
 import 'package:u_course_example/app_states.dart';
+import 'package:u_course_example/pages/sign_in/bloc/sign_in_bloc.dart';
 import 'package:u_course_example/pages/sign_in/sign_in.dart';
 import 'package:u_course_example/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AppBlocs(),
         ),
+        BlocProvider(create: (context) => SignInBloc())
       ],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
