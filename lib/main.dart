@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/app_blocs.dart';
 import 'package:u_course_example/app_events.dart';
 import 'package:u_course_example/app_states.dart';
+import 'package:u_course_example/common/values/colors.dart';
 import 'package:u_course_example/pages/bloc_providers.dart';
+import 'package:u_course_example/pages/register/register.dart';
 import 'package:u_course_example/pages/sign_in/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
+              iconTheme: IconThemeData(color: AppColors.primaryText),
               elevation: 0,
               backgroundColor: Colors.white,
             ),
@@ -40,6 +43,7 @@ class MyApp extends StatelessWidget {
           routes: {
             "myHomePage": (context) => const MyHomePage(),
             "signIn": (context) => const SignIn(),
+            "register": (context) => const Register(),
           },
         ),
       ),
