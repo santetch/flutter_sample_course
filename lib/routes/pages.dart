@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:u_course_example/global.dart';
 import 'package:u_course_example/pages/application/application_page.dart';
 import 'package:u_course_example/pages/application/bloc/app_blocs.dart';
 import 'package:u_course_example/pages/register/bloc/register_blocs.dart';
@@ -9,6 +10,8 @@ import 'package:u_course_example/pages/sign_in/sign_in.dart';
 import 'package:u_course_example/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:u_course_example/pages/welcome/views/welcome.dart';
 import 'package:u_course_example/routes/names.dart';
+
+import 'page_entity.dart';
 
 class AppPages {
   static List<PageEntity> routes() {
@@ -53,9 +56,17 @@ class AppPages {
 
   static MaterialPageRoute generateRouteSettings(RouteSettings settings) {
     if (settings.name != null) {
-      var result = routes().where((element) => element.route == settings.name);
+      final result =
+          routes().where((element) => element.route == settings.name);
 
       if (result.isNotEmpty) {
+        bool isOnBoardingCompleted =
+            Global.storageService.isOnBoardingCompleted();
+
+        if (result.first.route == AppRoutes.INITIAL && isOnBoardingCompleted) {
+          return _goToSignIn(settings);
+        }
+
         return MaterialPageRoute(
           builder: (_) => result.first.page,
           settings: settings,
@@ -63,18 +74,13 @@ class AppPages {
       }
     }
 
+    return _goToSignIn(settings);
+  }
+
+  static MaterialPageRoute _goToSignIn(settings) {
     return MaterialPageRoute(
       builder: (_) => const SignIn(),
       settings: settings,
     );
   }
-}
-
-// unify blocProvider and routes and pages
-class PageEntity {
-  String route;
-  Widget page;
-  dynamic bloc;
-
-  PageEntity({required this.route, required this.page, required this.bloc});
 }

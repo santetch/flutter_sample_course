@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/common/values/colors.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:u_course_example/routes/routes.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+import 'global.dart';
 
-  await Firebase.initializeApp();
+Future<void> main() async {
+  await Global.init();
 
   runApp(const MyApp());
 }
