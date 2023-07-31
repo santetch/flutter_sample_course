@@ -46,6 +46,8 @@ class SingInController {
             // verified user
 
             print("user verified");
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {
             // we had some weird error
 
