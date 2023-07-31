@@ -60,10 +60,11 @@ class AppPages {
           routes().where((element) => element.route == settings.name);
 
       if (result.isNotEmpty) {
-        bool isOnBoardingCompleted =
-            Global.storageService.isOnBoardingCompleted();
-
-        if (result.first.route == AppRoutes.INITIAL && isOnBoardingCompleted) {
+        if (result.first.route == AppRoutes.INITIAL &&
+            Global.storageService.isOnBoardingCompleted()) {
+          if (Global.storageService.isLoggedIn()) {
+            return _goToApplicationPage(settings);
+          }
           return _goToSignIn(settings);
         }
 
@@ -80,6 +81,13 @@ class AppPages {
   static MaterialPageRoute _goToSignIn(settings) {
     return MaterialPageRoute(
       builder: (_) => const SignIn(),
+      settings: settings,
+    );
+  }
+
+  static MaterialPageRoute _goToApplicationPage(settings) {
+    return MaterialPageRoute(
+      builder: (_) => const ApplicationPage(),
       settings: settings,
     );
   }

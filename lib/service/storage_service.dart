@@ -13,7 +13,17 @@ class StorageService {
     return await _prefs.setBool(key, value);
   }
 
+  Future<bool> setValue(String key, String value) async {
+    return await _prefs.setString(key, value);
+  }
+
   bool isOnBoardingCompleted() {
     return _prefs.getBool(AppConstants.IS_ON_BOARDING_COMPLETED) ?? false;
+  }
+
+  bool isLoggedIn() {
+    return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) == null
+        ? false
+        : true;
   }
 }

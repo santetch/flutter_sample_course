@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:u_course_example/common/values/constant.dart';
 import 'package:u_course_example/common/widgets/flutter_toast.dart';
+import 'package:u_course_example/global.dart';
 import 'package:u_course_example/pages/sign_in/bloc/sign_in_bloc.dart';
 
 class SingInController {
@@ -44,8 +46,8 @@ class SingInController {
 
           if (user != null) {
             // verified user
-
-            print("user verified");
+            Global.storageService
+                .setValue(AppConstants.STORAGE_USER_TOKEN_KEY, "123");
             Navigator.of(context)
                 .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {
