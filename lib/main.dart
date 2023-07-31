@@ -7,7 +7,7 @@ import 'package:u_course_example/pages/register/register.dart';
 import 'package:u_course_example/pages/sign_in/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'pages/welcome/views/welcome.dart';
+import 'pages/application/application_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const Welcome(),
+          //home: const Welcome(),
+          home: const ApplicationPage(),
           routes: {
             "signIn": (context) => const SignIn(),
             "register": (context) => const Register(),
