@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/common/values/colors.dart';
-import 'package:u_course_example/pages/bloc_providers.dart';
-import 'package:u_course_example/pages/register/register.dart';
-import 'package:u_course_example/pages/sign_in/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'pages/application/application_page.dart';
+import 'package:u_course_example/routes/pages.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: AppBlocProviders.allBlocProviders,
+      providers: [...AppPages.allBlocProviders(context)],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           title: 'Flutter Demo',
@@ -36,12 +32,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          //home: const Welcome(),
-          home: const ApplicationPage(),
-          routes: {
-            "signIn": (context) => const SignIn(),
-            "register": (context) => const Register(),
-          },
+          onGenerateRoute: AppPages.generateRouteSettings,
         ),
       ),
     );

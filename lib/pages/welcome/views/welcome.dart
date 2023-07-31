@@ -139,7 +139,7 @@ class _WelcomeState extends State<Welcome> {
               );
             } else {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("signIn", (route) => false);
+                  .pushNamedAndRemoveUntil("/signIn", (route) => false);
             }
           },
           child: Container(
