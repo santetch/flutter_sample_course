@@ -175,20 +175,6 @@ Widget slidersView(BuildContext context, HomeStates state) {
   );
 }
 
-Widget _slidersContainer({String path = "assets/icons/art.png"}) {
-  return Container(
-    width: 325.w,
-    height: 160.h,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(20.h)),
-      image: DecorationImage(
-        fit: BoxFit.fill,
-        image: AssetImage(path),
-      ),
-    ),
-  );
-}
-
 Widget menuView() {
   return Column(
     children: [
@@ -228,15 +214,72 @@ Widget menuView() {
   );
 }
 
+Widget courseGrid() {
+  return Container(
+    padding: EdgeInsets.all(12.w),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15.w),
+      image: const DecorationImage(
+        fit: BoxFit.fill,
+        image: AssetImage("assets/icons/Image(1).png"),
+      ),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _reusableText(
+          "Best course for IT and Engineering",
+          size: 11,
+          color: AppColors.primaryElementText,
+          maxLines: 1,
+          textAlign: TextAlign.left,
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
+        _reusableText(
+          "Flutter best course",
+          size: 8,
+          color: AppColors.primaryFourElementText,
+          weight: FontWeight.normal,
+          maxLines: 1,
+          textAlign: TextAlign.left,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _slidersContainer({String path = "assets/icons/art.png"}) {
+  return Container(
+    width: 325.w,
+    height: 160.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(20.h)),
+      image: DecorationImage(
+        fit: BoxFit.fill,
+        image: AssetImage(path),
+      ),
+    ),
+  );
+}
+
 Widget _reusableText(
   String text, {
   Color color = AppColors.primaryText,
   FontWeight weight = FontWeight.bold,
   double size = 16,
+  TextAlign textAlign = TextAlign.start,
+  int maxLines = 99,
 }) {
   return Container(
     child: Text(
       text,
+      maxLines: maxLines,
+      overflow: TextOverflow.fade,
+      textAlign: textAlign,
+      softWrap: false,
       style: TextStyle(
         color: color,
         fontWeight: weight,
