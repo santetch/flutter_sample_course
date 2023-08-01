@@ -65,6 +65,9 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   forgotPassword(),
+                  SizedBox(
+                    height: 100.h,
+                  ),
                   buildLogInAndRegisterButtons(
                     "Log In",
                     "login",

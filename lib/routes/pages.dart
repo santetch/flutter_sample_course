@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:u_course_example/global.dart';
 import 'package:u_course_example/pages/application/application_page.dart';
 import 'package:u_course_example/pages/application/bloc/app_blocs.dart';
 import 'package:u_course_example/pages/register/bloc/register_blocs.dart';
@@ -11,6 +10,7 @@ import 'package:u_course_example/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:u_course_example/pages/welcome/views/welcome.dart';
 import 'package:u_course_example/routes/names.dart';
 
+import '../global.dart';
 import 'page_entity.dart';
 
 class AppPages {
