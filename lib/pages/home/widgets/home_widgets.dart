@@ -7,6 +7,8 @@ import 'package:u_course_example/pages/home/bloc/home_blocs.dart';
 import 'package:u_course_example/pages/home/bloc/home_events.dart';
 import 'package:u_course_example/pages/home/bloc/home_states.dart';
 
+import '../../widgets/base_text_widgets.dart';
+
 AppBar buildAppBar() {
   return AppBar(
     title: Container(
@@ -187,9 +189,9 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _reusableText("Choose your course"),
+            reusableText("Choose your course"),
             GestureDetector(
-              child: _reusableText(
+              child: reusableText(
                 "See all",
                 color: AppColors.primaryThreeElementText,
                 weight: FontWeight.normal,
@@ -228,7 +230,7 @@ Widget courseGrid() {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _reusableText(
+        reusableText(
           "Best course for IT and Engineering",
           size: 11,
           color: AppColors.primaryElementText,
@@ -238,7 +240,7 @@ Widget courseGrid() {
         SizedBox(
           height: 5.h,
         ),
-        _reusableText(
+        reusableText(
           "Flutter best course",
           size: 8,
           color: AppColors.primaryFourElementText,
@@ -265,30 +267,6 @@ Widget _slidersContainer({String path = "assets/icons/art.png"}) {
   );
 }
 
-Widget _reusableText(
-  String text, {
-  Color color = AppColors.primaryText,
-  FontWeight weight = FontWeight.bold,
-  double size = 16,
-  TextAlign textAlign = TextAlign.start,
-  int maxLines = 99,
-}) {
-  return Container(
-    child: Text(
-      text,
-      maxLines: maxLines,
-      overflow: TextOverflow.fade,
-      textAlign: textAlign,
-      softWrap: false,
-      style: TextStyle(
-        color: color,
-        fontWeight: weight,
-        fontSize: size.sp,
-      ),
-    ),
-  );
-}
-
 Widget _reusableMenuButtonsText(String text, bool isActive) {
   final color = isActive
       ? AppColors.primaryElement
@@ -310,7 +288,7 @@ Widget _reusableMenuButtonsText(String text, bool isActive) {
       borderRadius: BorderRadius.circular(7.w),
       border: Border.all(color: color),
     ),
-    child: _reusableText(
+    child: reusableText(
       text,
       color: textColor,
       weight: FontWeight.normal,

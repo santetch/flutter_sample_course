@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/common/values/colors.dart';
 
-AppBar buildAppBar(String type) {
+AppBar buildAppBar(String type, {FontWeight weight = FontWeight.normal}) {
   return AppBar(
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
@@ -17,7 +17,7 @@ AppBar buildAppBar(String type) {
       style: TextStyle(
         color: AppColors.primaryText,
         fontSize: 16.sp,
-        fontWeight: FontWeight.normal,
+        fontWeight: weight,
       ),
     ),
   );

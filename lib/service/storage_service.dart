@@ -17,6 +17,10 @@ class StorageService {
     return await _prefs.setString(key, value);
   }
 
+  Future<bool> removeValue(String key) async {
+    return await _prefs.remove(key);
+  }
+
   bool isOnBoardingCompleted() {
     return _prefs.getBool(AppConstants.IS_ON_BOARDING_COMPLETED) ?? false;
   }
