@@ -52,6 +52,8 @@ class RegisterController {
       if (credential.user != null) {
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(username);
+        const photoURL = 'uploads/default.png';
+        await credential.user?.updatePhotoURL(photoURL);
         toastInfo(
           msg:
               "An email has been sent to your registered email. To activate it please check your inbox!",

@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:u_course_example/common/entities/entities.dart';
 import 'package:u_course_example/common/values/constant.dart';
 import 'package:u_course_example/common/widgets/flutter_toast.dart';
 import 'package:u_course_example/global.dart';
 import 'package:u_course_example/pages/sign_in/bloc/sign_in_bloc.dart';
+
+import '../../common/apis/user_api.dart';
 
 class SingInController {
   final BuildContext context;
@@ -14,7 +20,6 @@ class SingInController {
   Future<void> handleSignIn(String type) async {
     try {
       if (type == "email") {
-        // BlocProvider.of<SignInBloc>(context).state;
         final state = context.read<SignInBloc>().state;
 
         String email = state.email;
@@ -45,6 +50,17 @@ class SingInController {
           final user = credential.user;
 
           if (user != null) {
+            LoginRequestEntity loginRequestEntity = LoginRequestEntity(
+                avatar: user.photoURL,
+                open_id: user.uid,
+                email: user.email,
+                name: user.displayName,
+                phone: user.phoneNumber,
+                // type 1 = email login
+                type: 1);
+
+            asyncPostData(loginRequestEntity);
+
             // verified user
             Global.storageService
                 .setValue(AppConstants.STORAGE_USER_TOKEN_KEY, "123");
@@ -67,5 +83,32 @@ class SingInController {
         }
       }
     } catch (e) {}
+  }
+
+  void asyncPostData(LoginRequestEntity loginRequestEntity) async {
+    EasyLoading.show(
+      indicator: const CircularProgressIndicator(),
+      maskType: EasyLoadingMaskType.clear,
+      dismissOnTap: true,
+    );
+    final result = await UserAPI.login(params: loginRequestEntity);
+
+    if (result.code == 200) {
+      try {
+        Global.storageService.setValue(
+            AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
+        Global.storageService.setValue(
+            AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
+        EasyLoading.dismiss();
+
+        if (context.mounted) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/application', (route) => false);
+        }
+      } catch (e) {}
+    } else {
+      EasyLoading.dismiss();
+      toastInfo(msg: 'unknown error');
+    }
   }
 }

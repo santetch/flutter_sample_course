@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/common/values/colors.dart';
 import 'package:u_course_example/pages/home/bloc/home_blocs.dart';
 import 'package:u_course_example/pages/home/bloc/home_states.dart';
+import 'package:u_course_example/pages/home/home_controller.dart';
 import 'package:u_course_example/pages/home/widgets/home_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,11 +15,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late HomeController _homeController;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeController = HomeController(context: context);
+    _homeController.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: buildAppBar(),
+        appBar: buildAppBar(
+          avatarUrl: _homeController.userProfile?.avatar.toString(),
+        ),
         body: BlocBuilder<HomeBlocs, HomeStates>(
           builder: (context, state) {
             return Container(
@@ -34,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SliverToBoxAdapter(
                     child: homePageText(
-                      text: "username",
+                      text: _homeController.userProfile?.name ?? 'username',
                       color: AppColors.primaryText,
                       top: 5,
                     ),
@@ -59,11 +71,11 @@ class _HomePageState extends State<HomePage> {
                         childAspectRatio: 1.6,
                       ),
                       delegate: SliverChildBuilderDelegate(
-                        childCount: 4,
+                        childCount: state.courseItems.length,
                         (BuildContext context, int index) {
                           return GestureDetector(
                             onTap: () {},
-                            child: courseGrid(),
+                            child: courseGrid(state.courseItems[index]),
                           );
                         },
                       ),

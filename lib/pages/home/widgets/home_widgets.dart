@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/common/values/colors.dart';
+import 'package:u_course_example/common/values/constant.dart';
 import 'package:u_course_example/pages/home/bloc/home_blocs.dart';
 import 'package:u_course_example/pages/home/bloc/home_events.dart';
 import 'package:u_course_example/pages/home/bloc/home_states.dart';
 
+import '../../../common/entities/course.dart';
 import '../../widgets/base_text_widgets.dart';
 
-AppBar buildAppBar() {
+AppBar buildAppBar({String? avatarUrl}) {
   return AppBar(
     title: Container(
       margin: EdgeInsets.only(left: 7.w, right: 7.w),
@@ -26,9 +28,9 @@ AppBar buildAppBar() {
             child: Container(
               width: 40.w,
               height: 40.h,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/icons/person.png"),
+                  image: _createImage(avatarUrl),
                 ),
               ),
             ),
@@ -216,14 +218,17 @@ Widget menuView() {
   );
 }
 
-Widget courseGrid() {
+Widget courseGrid(CourseItem item) {
   return Container(
     padding: EdgeInsets.all(12.w),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15.w),
-      image: const DecorationImage(
+      image: DecorationImage(
         fit: BoxFit.fill,
-        image: AssetImage("assets/icons/Image(1).png"),
+        image: _createImage(
+          item.thumbnail,
+          defaultImage: "assets/icons/Image(1).png",
+        ),
       ),
     ),
     child: Column(
@@ -231,7 +236,7 @@ Widget courseGrid() {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         reusableText(
-          "Best course for IT and Engineering",
+          item.name ?? '',
           size: 11,
           color: AppColors.primaryElementText,
           maxLines: 1,
@@ -241,7 +246,7 @@ Widget courseGrid() {
           height: 5.h,
         ),
         reusableText(
-          "Flutter best course",
+          item.description ?? '',
           size: 8,
           color: AppColors.primaryFourElementText,
           weight: FontWeight.normal,
@@ -251,6 +256,16 @@ Widget courseGrid() {
       ],
     ),
   );
+}
+
+ImageProvider _createImage(
+  String? url, {
+  String defaultImage = "assets/icons/person.png",
+}) {
+  if (url != null) {
+    return NetworkImage('${AppConstants.SERVER_API_URL}$url');
+  }
+  return AssetImage(defaultImage);
 }
 
 Widget _slidersContainer({String path = "assets/icons/art.png"}) {

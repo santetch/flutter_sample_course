@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/common/values/colors.dart';
 import 'package:u_course_example/routes/routes.dart';
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (context, child) => MaterialApp(
+          builder: EasyLoading.init(),
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
