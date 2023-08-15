@@ -45,13 +45,13 @@ final bottomTabs = [
     icon: SizedBox(
       height: 15.h,
       width: 15.w,
-      child: Image.asset("assets/icons/search2.png"),
+      child: Image.asset("assets/icons/home.png"),
     ),
     activeIcon: SizedBox(
       height: 15.h,
       width: 15.w,
       child: Image.asset(
-        "assets/icons/search2.png",
+        "assets/icons/home.png",
         color: AppColors.primaryElement,
       ),
     ),
@@ -61,13 +61,13 @@ final bottomTabs = [
     icon: SizedBox(
       height: 15.h,
       width: 15.w,
-      child: Image.asset("assets/icons/play-circle1.png"),
+      child: Image.asset("assets/icons/home.png"),
     ),
     activeIcon: SizedBox(
       height: 15.h,
       width: 15.w,
       child: Image.asset(
-        "assets/icons/play-circle1.png",
+        "assets/icons/home.png",
         color: AppColors.primaryElement,
       ),
     ),
@@ -77,13 +77,13 @@ final bottomTabs = [
     icon: SizedBox(
       height: 15.h,
       width: 15.w,
-      child: Image.asset("assets/icons/message-circle.png"),
+      child: Image.asset("assets/icons/home.png"),
     ),
     activeIcon: SizedBox(
       height: 15.h,
       width: 15.w,
       child: Image.asset(
-        "assets/icons/message-circle.png",
+        "assets/icons/home.png",
         color: AppColors.primaryElement,
       ),
     ),
@@ -93,13 +93,13 @@ final bottomTabs = [
     icon: SizedBox(
       height: 15.h,
       width: 15.w,
-      child: Image.asset("assets/icons/person2.png"),
+      child: Image.asset("assets/icons/home.png"),
     ),
     activeIcon: SizedBox(
       height: 15.h,
       width: 15.w,
       child: Image.asset(
-        "assets/icons/person2.png",
+        "assets/icons/home.png",
         color: AppColors.primaryElement,
       ),
     ),

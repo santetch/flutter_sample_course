@@ -105,7 +105,9 @@ class SingInController {
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/application', (route) => false);
         }
-      } catch (e) {}
+      } catch (e) {
+        EasyLoading.dismiss();
+      }
     } else {
       EasyLoading.dismiss();
       toastInfo(msg: 'unknown error');

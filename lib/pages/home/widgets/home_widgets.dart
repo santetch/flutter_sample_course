@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_course_example/common/values/colors.dart';
-import 'package:u_course_example/common/values/constant.dart';
 import 'package:u_course_example/pages/home/bloc/home_blocs.dart';
 import 'package:u_course_example/pages/home/bloc/home_events.dart';
 import 'package:u_course_example/pages/home/bloc/home_states.dart';
@@ -260,10 +259,11 @@ Widget courseGrid(CourseItem item) {
 
 ImageProvider _createImage(
   String? url, {
-  String defaultImage = "assets/icons/person.png",
+  String defaultImage = "assets/icons/home.png",
 }) {
   if (url != null) {
-    return NetworkImage('${AppConstants.SERVER_API_URL}$url');
+    // return NetworkImage('${AppConstants.SERVER_API_URL}$url');
+    return const AssetImage("assets/icons/home.png");
   }
   return AssetImage(defaultImage);
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:u_course_example/pages/application/application_page.dart';
 import 'package:u_course_example/pages/application/bloc/app_blocs.dart';
+import 'package:u_course_example/pages/course/bloc/course_detail_bloc.dart';
+import 'package:u_course_example/pages/course/course_detail.dart';
 import 'package:u_course_example/pages/home/bloc/home_blocs.dart';
 import 'package:u_course_example/pages/home/home_page.dart';
 import 'package:u_course_example/pages/profile/settings/bloc/settings_blocs.dart';
@@ -60,6 +62,13 @@ class AppPages {
         page: const Settings(),
         bloc: BlocProvider(
           create: (_) => SettingsBlocs(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.COURSE_DETAIL,
+        page: const CourseDetail(),
+        bloc: BlocProvider(
+          create: (_) => CourseDetailBloc(),
         ),
       ),
     ];

@@ -10,12 +10,13 @@ Widget reusableText(
   double size = 16,
   TextAlign textAlign = TextAlign.start,
   int maxLines = 99,
+  TextOverflow overflow = TextOverflow.fade,
 }) {
   return Container(
     child: Text(
       text,
       maxLines: maxLines,
-      overflow: TextOverflow.fade,
+      overflow: overflow,
       textAlign: textAlign,
       softWrap: false,
       style: TextStyle(

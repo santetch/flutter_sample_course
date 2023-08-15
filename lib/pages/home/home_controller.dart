@@ -1,20 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:u_course_example/common/entities/user.dart';
+import 'package:u_course_example/common/values/enviroment.dart';
 import 'package:u_course_example/pages/home/bloc/home_blocs.dart';
 
 import '../../common/apis/course_api.dart';
+import '../../common/entities/course.dart';
 import '../../global.dart';
 import 'bloc/home_events.dart';
 
 class HomeController {
-  final BuildContext context;
+  late BuildContext context;
 
-  UserItem? userProfile = Global.storageService.getUserProfile();
+  UserItem? get userProfile => Global.storageService.getUserProfile();
 
-  HomeController({required this.context});
+  static final HomeController _singleton = HomeController._internal();
+
+  HomeController._internal();
+
+  factory HomeController({required BuildContext context}) {
+    _singleton.context = context;
+    return _singleton;
+  }
 
   Future<void> init() async {
+    if (Enviroment.IS_DEV) {
+      context.read<HomeBlocs>().add(HomeCourseItem(devData));
+      return;
+    }
+
     if (Global.storageService.getUserToken().isNotEmpty) {
       var result = await CourseAPI.courseList();
 
@@ -31,3 +45,12 @@ class HomeController {
     return;
   }
 }
+
+final List<CourseItem> devData = [
+  CourseItem(
+    name: "test",
+    description: "test",
+    thumbnail: "assets/icons/home.png",
+    id: 123,
+  )
+];

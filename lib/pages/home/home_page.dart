@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:u_course_example/common/entities/entities.dart';
 import 'package:u_course_example/common/values/colors.dart';
 import 'package:u_course_example/pages/home/bloc/home_blocs.dart';
 import 'package:u_course_example/pages/home/bloc/home_states.dart';
 import 'package:u_course_example/pages/home/home_controller.dart';
 import 'package:u_course_example/pages/home/widgets/home_widgets.dart';
+import 'package:u_course_example/routes/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,13 +17,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late HomeController _homeController;
+  late UserItem? _userProfile;
 
   @override
   void initState() {
     super.initState();
-    _homeController = HomeController(context: context);
-    _homeController.init();
+    _userProfile = HomeController(context: context).userProfile;
   }
 
   @override
@@ -29,10 +30,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: buildAppBar(
-          avatarUrl: _homeController.userProfile?.avatar.toString(),
+          avatarUrl: _userProfile?.avatar.toString(),
         ),
         body: BlocBuilder<HomeBlocs, HomeStates>(
           builder: (context, state) {
+            if (state.courseItems.isEmpty) {
+              HomeController(context: context).init();
+            }
             return Container(
               margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
               child: CustomScrollView(
@@ -46,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SliverToBoxAdapter(
                     child: homePageText(
-                      text: _homeController.userProfile?.name ?? 'username',
+                      text: _userProfile?.name ?? 'username',
                       color: AppColors.primaryText,
                       top: 5,
                     ),
@@ -74,7 +78,14 @@ class _HomePageState extends State<HomePage> {
                         childCount: state.courseItems.length,
                         (BuildContext context, int index) {
                           return GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                AppRoutes.COURSE_DETAIL,
+                                arguments: {
+                                  'id': state.courseItems.elementAt(index).id
+                                },
+                              );
+                            },
                             child: courseGrid(state.courseItems[index]),
                           );
                         },
